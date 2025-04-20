@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class='container'>
+        <h1 class='title'>Tic-Tac-Toe</h1>
+        <h2 id='turn-display'>Player <span id='x-span'>X</span>'s turn</h2>
+        <div class="board">
+
+        </div>
+        <button class='restart' onclick="resetGame()">Restart</button>
+
+        <div id="board">
+            <div id="row1">
+                <div class = "tile" id='00' onclick="markTile(this)"></div>
+                <div class = "tile" id='01' onclick="markTile(this)"></div>
+                <div class = "tile" id='02' onclick="markTile(this)"></div>
+            </div>
+            <div id="row2">
+                <div class ="tile" id='10' onclick="markTile(this)"></div>
+                <div class ="tile" id='11' onclick="markTile(this)"></div>
+                <div class ="tile" id='12' onclick="markTile(this)"></div>
+            </div>
+            <div id="row3">
+                <div class ="tile" id='20' onclick="markTile(this)"></div>
+                <div class ="tile" id='21' onclick="markTile(this)"></div>
+                <div class ="tile" id='22' onclick="markTile(this)"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
