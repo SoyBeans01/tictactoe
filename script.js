@@ -20,13 +20,16 @@ const updateSpanTag = () => {
 
 }
 
-const displayTurn = (xTurn) => {
-    if (xTurn) {
-        return (`Player <span id='x-span'>X</span>'s turn`);
+const createWinnerMessage = (xWin, catsGame) =>{
+    const newMessage = document.createElement('div');
+    newMessage.setAttribute('class', 'winner');
+    if(!catsGame){
+        newMessage.innerHTML = `Congratulations ${xWin ? "<span id='x-span'>X</span>" : "<span id='o-span'>O</span>"} Wins!`;
     }
-    else {
-        return ("Player <span id='o-span'>O</span>'s turn");
+    else if(catsGame){
+        newMessage.innerHTML = `Cat's Game`;
     }
+    document.body.append(newMessage);
 }
 
 const markTile = (tile) => {
@@ -47,6 +50,8 @@ const markTile = (tile) => {
 
 const resetGame = () => {
     gameOver = false;
+    let winnerMessage = document.getElementsByClassName('winner')[0];
+    winnerMessage.remove();
     let images = Array.from(document.getElementsByClassName('image'));
     for (let i = 0; i < images.length; i++) {
         images[i].remove();
@@ -56,6 +61,7 @@ const resetGame = () => {
 }
 
 const checkWinner = (clickedTile) => {
+    let xWin = false;
     const tiles = Array.from(document.getElementsByClassName('tile'));
 
     //checks vertically
@@ -81,12 +87,11 @@ const checkWinner = (clickedTile) => {
                 }
             }
             if (xColSum == 3) {
-                alert('player X is the winner');
+                xWin = true;
                 gameOver = true;
                 break;
             }
             if (oColSum == 3) {
-                alert('player O is the winner');
                 gameOver = true;
                 break;
             }
@@ -112,12 +117,11 @@ const checkWinner = (clickedTile) => {
                 }
             }
             if (xRowSum == 3) {
-                alert('player X is the winner');
+                xWin = true;
                 gameOver = true;
                 break;
             }
             if (oRowSum == 3) {
-                alert('player O is the winner');
                 gameOver = true;
                 break;
             }
@@ -134,9 +138,6 @@ const checkWinner = (clickedTile) => {
             let kStr = k.toString();
             let iStr = Math.abs(i - k).toString();
 
-            console.log('i: ' + iStr);
-            console.log('k: ' + k);
-
             const diagTile = document.getElementById(kStr + iStr);
             const diagImage = diagTile.children[0];
 
@@ -148,18 +149,33 @@ const checkWinner = (clickedTile) => {
                     oDiagSum += 1;
                 }
             }
-            console.log('x diagonals: ' + xDiagSum);
-            console.log('o diagonals: ' + oDiagSum);
             if (xDiagSum == 3) {
-                alert('player X is the winner');
+                xWin = true;
                 gameOver = true;
                 break;
             }
             if (oDiagSum == 3) {
-                alert('player O is the winner');
                 gameOver = true;
                 break;
             }
         }
     }
+    //checks for draw
+    let draw = true;
+    let catsGame = false;
+    for (let i = 0; i < 9; i++) {
+        if (tiles[i].children.length === 0) {
+            draw = false;
+            break;
+        }
+    }
+    if (!gameOver && draw) {
+        catsGame = true;
+        gameOver = true;
+    }
+
+    if(gameOver){
+        createWinnerMessage(xWin, catsGame);
+    }
+
 }

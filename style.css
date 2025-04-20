@@ -48,8 +48,18 @@
     height: 2rem;
     font-weight: 600;
     border-radius: 1rem;
+    margin: 5px;
 }
 .restart:hover{
     background-color: #b3b9be;
     cursor: pointer;
+}
+.winner{
+    padding: 5px;
+    margin: 5px;
+    color: aliceblue;
+    font-size: 32px;
+    width: 20rem;
+    height: 10rem;
+    justify-self: center;
 }
