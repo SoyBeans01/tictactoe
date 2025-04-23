@@ -1,6 +1,6 @@
 let xTurn = true;
-const x_icon = "./images/x.png";
-const o_icon = "./images/o.png";
+const x_icon = "./images/X.png";
+const o_icon = "./images/O.png";
 const markedTiles = [];
 let gameOver = false;
 
